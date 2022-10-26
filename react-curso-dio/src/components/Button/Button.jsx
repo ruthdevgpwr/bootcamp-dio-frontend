@@ -1,7 +1,11 @@
-export function Button({ title }) {
+import { ButtonContainer } from "./styles"
+
+export function Button({ title, variant = "primary", onClick }) {
   return (
     <div>
-      <button>{title}</button>
+      <ButtonContainer variant={variant} onClick={onClick}>
+        {title}
+      </ButtonContainer>
     </div>
   )
 }
