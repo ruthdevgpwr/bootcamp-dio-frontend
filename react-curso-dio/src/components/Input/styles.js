@@ -4,7 +4,7 @@ export const InputContainer = styled.div`
   width: 100%;
   max-width: 275px;
   height: 30px;
-  border-bottom: 1px solid #3B3450
+  border-bottom: 1px solid #3b3450;
   display: flex;
   align-items: center;
   margin-bottom: 20px;
@@ -16,12 +16,10 @@ export const IconContainer = styled.div`
 
 export const InputText = styled.input`
   background-color: transparent;
-  color: #ffff;
-  width: 100%;
+  color: #ffffff;
+  flex: 1;
   border: 0;
   height: 30px;
-  display: flex;
-  flex-direction: row;
 `
 
 export const ErrorText = styled.p`

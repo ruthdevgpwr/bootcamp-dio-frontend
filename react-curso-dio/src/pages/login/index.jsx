@@ -1,10 +1,11 @@
+import { useNavigate } from "react-router-dom"
 import { MdEmail, MdLock } from "react-icons/md"
 import { Button } from "../../components/Button/Button"
 import { Header } from "../../components/Header"
 import { Input } from "../../components/Input"
+import { api } from "../../services/api"
+
 import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
 
 import {
   Container,
@@ -18,37 +19,36 @@ import {
   Wrapper,
 } from "./styles"
 
-const schema = yup
-  .object({
-    email: yup
-      .string()
-      .email("Email não é válido")
-      .required("Campo Obrigatório"),
-    password: yup
-      .string()
-      .min(3, "No mínimo 3 caracteres")
-      .required("Campo Obrigatório"),
-  })
-  .required()
-
 export function Login() {
-  //  const navigate = useNavigate
+  const navigate = useNavigate()
 
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    reValidateMode: "onChange",
     mode: "onChange",
   })
 
-  console.log(isValid, errors)
+  const onSubmit = async (formData) => {
+    try {
+      const { data } = await api.get(
+        `/users?email=${formData.email}&senha=${formData.senha}`
+      )
 
-  const onSubmit = (data) => console.log(data)
+      if (data.length && data[0].id) {
+        navigate("/feed")
+        return
+      }
 
-  //const handleClickSignin = =>
-  //  navigate"/login"
+      alert("Usuário ou senha inválido")
+    } catch (e) {
+      //TODO: HOUVE UM ERRO
+    }
+  }
+
+  console.log("errors", errors)
 
   return (
     <>
@@ -66,20 +66,20 @@ export function Login() {
             <SubtitleLogin>Faça seu login e make the change._</SubtitleLogin>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Input
-                name="email"
-                errorMessage={errors?.email?.message}
-                control={control}
                 placeholder="E-mail"
                 leftIcon={<MdEmail />}
-              />
-              <Input
-                name="password"
-                errorMessage={errors?.password?.message}
+                name="email"
                 control={control}
+              />
+              {errors.email && <span>E-mail é obrigatório</span>}
+              <Input
                 type="password"
                 placeholder="Senha"
                 leftIcon={<MdLock />}
+                name="senha"
+                control={control}
               />
+              {errors.senha && <span>Senha é obrigatório</span>}
               <Button title="Entrar" variant="secondary" type="submit" />
             </form>
             <Row>
