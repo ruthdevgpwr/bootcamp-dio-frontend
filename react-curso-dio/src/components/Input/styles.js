@@ -20,4 +20,12 @@ export const InputText = styled.input`
   width: 100%;
   border: 0;
   height: 30px;
+  display: flex;
+  flex-direction: row;
+`
+
+export const ErrorText = styled.p`
+  color: #ff0000;
+  font-size: 12px;
+  margin-top: 5px 0;
 `

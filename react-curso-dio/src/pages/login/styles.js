@@ -47,7 +47,7 @@ export const TitleLogin = styled.p`
   margin-bottom: 8px;
 `
 
-export const SubTitleLogin = styled.p`
+export const SubtitleLogin = styled.p`
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
@@ -56,7 +56,7 @@ export const SubTitleLogin = styled.p`
   margin-bottom: 35px;
 `
 
-export const ForgotText = styled.p`
+export const EsqueciText = styled.p`
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
@@ -65,7 +65,7 @@ export const ForgotText = styled.p`
   color: #e5e044;
 `
 
-export const CreateText = styled.p`
+export const CriarText = styled.p`
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;

@@ -1,28 +1,54 @@
-import { useNavigate } from "react-router-dom"
 import { MdEmail, MdLock } from "react-icons/md"
-
-import { Header } from "../../components/Header"
-import { Input } from "../../components/Header/styles"
 import { Button } from "../../components/Button/Button"
+import { Header } from "../../components/Header"
+import { Input } from "../../components/Input"
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
 
 import {
-  Column,
   Container,
-  CreateText,
-  ForgotText,
-  Row,
-  SubTitleLogin,
   Title,
+  Column,
   TitleLogin,
+  SubtitleLogin,
+  EsqueciText,
+  CriarText,
+  Row,
   Wrapper,
 } from "./styles"
 
-export function Login() {
-  const navigate = useNavigate()
+const schema = yup
+  .object({
+    email: yup
+      .string()
+      .email("Email não é válido")
+      .required("Campo Obrigatório"),
+    password: yup
+      .string()
+      .min(3, "No mínimo 3 caracteres")
+      .required("Campo Obrigatório"),
+  })
+  .required()
 
-  const handleClickSignin = () => {
-    navigate("/feed")
-  }
+export function Login() {
+  //  const navigate = useNavigate
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onChange",
+  })
+
+  console.log(isValid, errors)
+
+  const onSubmit = (data) => console.log(data)
+
+  //const handleClickSignin = =>
+  //  navigate"/login"
 
   return (
     <>
@@ -37,25 +63,28 @@ export function Login() {
         <Column>
           <Wrapper>
             <TitleLogin>Faça seu cadastro</TitleLogin>
-            <SubTitleLogin>Faça seu login e make the change._</SubTitleLogin>
-            <form>
-              <Input placeholder="E-mail" leftIcon={<MdEmail />} name="email" />
+            <SubtitleLogin>Faça seu login e make the change._</SubtitleLogin>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Input
+                name="email"
+                errorMessage={errors?.email?.message}
+                control={control}
+                placeholder="E-mail"
+                leftIcon={<MdEmail />}
+              />
+              <Input
+                name="password"
+                errorMessage={errors?.password?.message}
+                control={control}
                 type="password"
                 placeholder="Senha"
                 leftIcon={<MdLock />}
-                name="senha"
               />
-              <Button
-                title="Entrar"
-                variant="secondary"
-                onClick={handleClickSignin}
-                type="button"
-              />
+              <Button title="Entrar" variant="secondary" type="submit" />
             </form>
             <Row>
-              <ForgotText>Esqueci minha senha</ForgotText>
-              <CreateText>Criar Conta</CreateText>
+              <EsqueciText>Esqueci minha senha</EsqueciText>
+              <CriarText>Criar Conta</CriarText>
             </Row>
           </Wrapper>
         </Column>
