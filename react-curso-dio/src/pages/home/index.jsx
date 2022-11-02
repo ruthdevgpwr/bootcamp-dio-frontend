@@ -3,7 +3,14 @@ import { Container, TextContent, Title, TitleHighlight } from "./styles"
 
 import bannerImg from "../../assets/banner.png"
 import { Button } from "../../components/Button/Button"
+import { useNavigate } from "react-router-dom"
+
 export function Home() {
+  const navigate = useNavigate()
+
+  const handleClickSignin = () => {
+    navigate("/login")
+  }
   return (
     <>
       <Header />
@@ -23,7 +30,7 @@ export function Home() {
           <Button
             title="Começar agora"
             variant="secondary"
-            onClick={() => null}
+            onClick={handleClickSignin}
           />
         </div>
         <div>
