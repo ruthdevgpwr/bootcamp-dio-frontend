@@ -1,4 +1,5 @@
-import { Button } from "../Button/Button"
+import React from "react";
+import { Button } from "../Button/Button";
 import {
   BuscarInputContainer,
   Container,
@@ -8,11 +9,12 @@ import {
   Row,
   UserPicture,
   Wrapper,
-} from "./styles"
+} from "./styles";
 
-import logo from "../../assets/logo-dio.png"
+import { IHeader } from "./types";
+import logo from "../../assets/logo-dio.png";
 
-export function Header({ autenticado }) {
+export function Header({ autenticado }: IHeader) {
   return (
     <Wrapper>
       <Container>
@@ -41,5 +43,5 @@ export function Header({ autenticado }) {
         </Row>
       </Container>
     </Wrapper>
-  )
+  );
 }

@@ -1,7 +1,8 @@
-import { Card } from "../../components/Card"
-import { Header } from "../../components/Header"
-import { UserInfo } from "../../components/UserInfo"
-import { Column, Container, Title, TitleHighlight } from "./styles"
+import React from "react";
+import { Card } from "../../components/Card";
+import { Header } from "../../components/Header";
+import { UserInfo } from "../../components/UserInfo";
+import { Column, Container, Title, TitleHighlight } from "./styles";
 
 export function Feed() {
   return (
@@ -35,5 +36,5 @@ export function Feed() {
         </Column>
       </Container>
     </>
-  )
+  );
 }
